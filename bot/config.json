@@ -2,17 +2,18 @@
     "token":"NO-LONGER-HERE-FOR-NEXT-Versions",
     "prefix": "&",
     "owner": {
-        "id": "243117191774470146"
+        "id": "SOME-ID (Work with oauth2 verification)"
     },
     "owners": [
-        "357595301210619904",
-        "243117191774470146"
+        "IF-IT's-team (same as owner.id)",
+        "IF-IT's-team (same as owner.id)" 
+    
     ],
     "database":{
-        "host":"149.91.80.94",
+        "host":"IP",
         "port":3306,
-        "user": "u455_A1PxzuFA6J",
-        "password":"K.o1aSUb9v03opzADwqCx^Io",
-        "database":"s455_obvision"
+        "user": "DB-USER",
+        "password":"DB-PASS",
+        "database":"DB-NAME"
     }
 }
