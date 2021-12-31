@@ -69,18 +69,24 @@ client.myob.onmessage = ({ data }) =>{
     if(msg.from === "bot"){
         return;
     }else{
-        fetch('https://discord.com/api/webhooks/921413516588617778/05N5fIA4t8KANoNcJnazkGmev1O_BKojEiHJPLXKBD7MQwqoyEPQPwXXBj0NI0Kdz9KW',
-            {
-              method: 'post',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                username: `${msg.user.username}#${msg.user.discriminator}`,
-                avatar_url:`https://cdn.discordapp.com/avatars/${msg.user.id}/${msg.user.avatar}.png`,
-                content: msg.message
-              }) 
-            })
+        client.guild.cache.get("919356120466857984").channels.cache.get("919724869376159764").fetchWebhooks().then(webhooks3=>{
+            const webhook3 = webhooks3.filter(e => e.type === "Incoming").first();
+            if(webhook3 === undefined){
+               message.channel.createWebhook(`${msg.user.username}#${msg.user.discriminator}`, {
+        avatar: `https://cdn.discordapp.com/avatars/${msg.user.id}/${msg.user.avatar}.png`,
+        reason: `Création de webhook par : ${msg.user.username}#${msg.user.discriminator}`
+    }).then(e => e.send(msg.message , {
+              username: `${msg.user.username}#${msg.user.discriminator}`,
+              avatarURL: `https://cdn.discordapp.com/avatars/${msg.user.id}/${msg.user.avatar}.png`,
+             }) )
+    }else{
+      webhook3.send(msg.message , {
+              username: `${msg.user.username}#${msg.user.discriminator}`,
+              avatarURL: `https://cdn.discordapp.com/avatars/${msg.user.id}/${msg.user.avatar}.png`,
+             })
+          }
+    })
+       
         }
     }
 };
