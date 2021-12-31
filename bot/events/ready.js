@@ -69,7 +69,7 @@ client.myob.onmessage = ({ data }) =>{
     if(msg.from === "bot"){
         return;
     }else{
-        client.guild.cache.get("919356120466857984").channels.cache.get("919724869376159764").fetchWebhooks().then(webhooks3=>{
+        client.guilds.cache.get("919356120466857984").channels.cache.get("919724869376159764").fetchWebhooks().then(webhooks3=>{
             const webhook3 = webhooks3.filter(e => e.type === "Incoming").first();
             if(webhook3 === undefined){
                message.channel.createWebhook(`${msg.user.username}#${msg.user.discriminator}`, {
