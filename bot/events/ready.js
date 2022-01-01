@@ -14,7 +14,7 @@ module.exports = async(client) => {
             }, 120000);
  client.guilds.cache.forEach(guild => {
     if(guild.me.permissions.has("MANAGE_GUILD")){
-    guild.invites.fetch().then(invites => client.guildInvites.set(guild.id, invites)).catch(() => {});
+    guild.invites.fetch().then(invites => client.guildInvites.set(guild.id, invites)).catch((err) => {});
       }  
   });
      client.functions.EOR = function EOR(e,message){
