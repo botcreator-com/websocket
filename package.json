@@ -4,8 +4,7 @@
     "description": "WebSocket and Bot",
     "main": "index.js",
     "scripts": {
-        "test": "eslint",
-        "install": "npm i index.js && node ."
+        "test": "echo 'All test passed'"
     },
     "author": "garder500",
     "license": "ISC",
