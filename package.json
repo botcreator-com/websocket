@@ -5,7 +5,8 @@
     "main": "index.js",
     "scripts": {
         "test": "echo 'All test passed'",
-        "lint": "eslint ./**/*.js"
+        "lint": "eslint ./bot/**/*.js",
+        "eslint": "eslint ./**/*.js"
     },
     "author": "garder500",
     "license": "ISC",
