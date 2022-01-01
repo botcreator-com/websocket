@@ -1,6 +1,6 @@
 const WebSocket= require('ws');
 const { createServer } =  require('http');
-const { workerData, parentPort } = require('worker_threads')
+const { workerData } = require('worker_threads')
 const server = createServer();
 const wss = new WebSocket.Server({ noServer: true });
 console.log("Server started on port : ", workerData.port);

@@ -1,5 +1,5 @@
 'use strict';
-const {blue, green} = require('colors'), fetch = require("node-fetch"), WebSocket = require("ws"), { workerData, parentPort } = require('worker_threads');
+const {blue, green} = require('colors'), fetch = require("node-fetch"), WebSocket = require("ws"), { workerData } = require('worker_threads');
 module.exports = async(client) => {
 
     console.log(`Logged in as ${blue(`${client.user.tag}`)}`);

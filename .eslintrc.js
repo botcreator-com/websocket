@@ -4,6 +4,7 @@ module.exports = {
         "node": true
     },
     "extends": "eslint:recommended",
+    "ignorePatterns": ["README.md", "*.json"],
     "rules": {
         "accessor-pairs": "error",
         "array-bracket-newline": "off",
