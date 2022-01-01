@@ -1,7 +1,6 @@
 'use strict'; // Defines that JavaScript code should be executed in 'strict mode'.
 const { token } = require('./config.json'),
 config = require('./config.json'),
-  Discord = require('discord.js'),
   {Client, Collection }= require('discord.js'),
   { readdirSync } = require('fs'),
   ms = require("ms"),

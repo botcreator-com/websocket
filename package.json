@@ -4,7 +4,8 @@
     "description": "WebSocket and Bot",
     "main": "index.js",
     "scripts": {
-        "test": "echo 'All test passed'"
+        "test": "echo 'All test passed'",
+        "lint": "eslint ./**/  --ext .js,.jsx,.ts,.tsx"
     },
     "author": "garder500",
     "license": "ISC",
