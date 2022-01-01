@@ -4,7 +4,7 @@
     "description": "WebSocket and Bot",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"This is the test eheh\"",
+        "test": "eslint",
         "install": "npm i index.js && node ."
     },
     "author": "garder500",
@@ -26,5 +26,8 @@
         "underscore": "^1.13.1",
         "ws": "latest",
         "ytdl-core": "^4.9.1"
+    },
+    "devDependencies": {
+        "eslint": "^8.6.0"
     }
 }
