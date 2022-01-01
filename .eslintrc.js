@@ -4,7 +4,7 @@ module.exports = {
         "node": true
     },
     "extends": "eslint:recommended",
-    "ignorePatterns": ["README.md", "*.json"],
+    "ignorePatterns": ["README.md", "*.json","./node_modules/*"],
     "rules": {
         "accessor-pairs": "error",
         "array-bracket-newline": "off",
