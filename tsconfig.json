@@ -3,7 +3,6 @@
     "target": "es2016",                                 
     "module": "commonjs",                           
      "resolveJsonModule": true,                       
-       "allowJs": true,                                
     "esModuleInterop": true,                        
     "forceConsistentCasingInFileNames": true,            
     "strict": true,                                   
