@@ -14,6 +14,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Setup NodeJs
+        uses: actions/setup-node@v2.1.4
+        with:
+          node-version: 16
+      - name: Install dependancies
+        run: npm ci
       - name: Building Typescript
         uses: FuLagann/tsc-build-push@v1
         with:
