@@ -3,7 +3,7 @@ import {blue, green} from "colors";
 import fetch from "node-fetch";
 import {Collection, Guild, Webhook} from "discord.js";
 import ExtendedClient from "../extendedClient";
-export = async (client: ExtendedClient) => {
+export default async (client: ExtendedClient) => {
 
     console.log(`Logged in as ${blue(`${client?.user?.tag}`)}`);
     await client?.user?.setStatus("idle");

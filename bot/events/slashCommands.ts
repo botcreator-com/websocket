@@ -2,7 +2,7 @@ import {CommandInteraction} from "discord.js";
 import ExtendedClient from "../extendedClient";
 
 
-export = async (client: ExtendedClient, interaction: CommandInteraction) => {
+export default async (client: ExtendedClient, interaction: CommandInteraction) => {
 
     const command: string = interaction.commandName;
 

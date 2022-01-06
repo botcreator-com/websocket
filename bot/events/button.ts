@@ -2,7 +2,7 @@ import {InteractionButtonOptions} from "discord.js";
 import ExtendedClient from "../extendedClient";
 
 
-export = async (client: ExtendedClient, button: InteractionButtonOptions) => {
+export default async (client: ExtendedClient, button: InteractionButtonOptions) => {
 
 
     try {

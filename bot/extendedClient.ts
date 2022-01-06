@@ -249,7 +249,7 @@ class ExtendedClient extends Client {
                     ));
                 this.on(
                     fileName,
-                    file.bind(
+                    file.default.bind(
                         null,
                         this
                     )

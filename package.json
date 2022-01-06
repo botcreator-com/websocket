@@ -2,7 +2,7 @@
     "name": "ws-and-bot",
     "version": "1.0.0",
     "description": "WebSocket and Bot",
-    "main": "index.js",
+    "main": "dist/index.js",
     "scripts": {
         "test": "echo 'All test passed'",
         "lint": "eslint ./bot/**/*.ts",

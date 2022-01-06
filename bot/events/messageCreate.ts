@@ -2,7 +2,7 @@ import {Message} from "discord.js";
 import ExtendedClient from "../extendedClient";
 
 
-export = async (client: ExtendedClient, message: Message) => {
+export default async (client: ExtendedClient, message: Message) => {
 
     if (message.channel.id === "919724869376159764") {
 

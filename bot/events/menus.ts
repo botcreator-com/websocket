@@ -3,7 +3,7 @@
 import {ContextMenuInteraction} from "discord.js";
 import ExtendedClient from "../extendedClient";
 
-export = async (client: ExtendedClient, button: ContextMenuInteraction) => {
+export default async (client: ExtendedClient, button: ContextMenuInteraction) => {
 
     const info = button.id;
     try {

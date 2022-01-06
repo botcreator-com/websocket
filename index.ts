@@ -3,7 +3,7 @@ import {Worker} from "worker_threads";
 const bot = (port: number) => {
 
         const worker = new Worker(
-            "./bot/index.js",
+            "./dist/bot/index.js",
             {"workerData": {port}}
         );
 
@@ -42,7 +42,7 @@ const bot = (port: number) => {
     webSocket = (port: number) => {
 
         const worker = new Worker(
-            "./ws/index.js",
+            "./dist/ws/index.js",
             {"workerData": {port}}
         );
         worker.on(
