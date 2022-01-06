@@ -1,4 +1,4 @@
-import { CommandInteraction} from "discord.js";
+import {CommandInteraction} from "discord.js";
 import ExtendedClient from "../extendedClient";
 
 

@@ -1,4 +1,4 @@
-import { Interaction} from "discord.js";
+import {Interaction} from "discord.js";
 import ExtendedClient from "../extendedClient";
 
 export = async (client: ExtendedClient, data: Interaction) => {
