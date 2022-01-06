@@ -1,7 +1,8 @@
-import {Client, ErrorEvent} from "discord.js";
+import {ErrorEvent} from "discord.js";
+import ExtendedClient from "../extendedClient";
 
 
-export = async (client: Client, error: ErrorEvent) => {
+export = async (client: ExtendedClient, error: ErrorEvent) => {
 
     await console.log(error);
 

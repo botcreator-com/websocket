@@ -1,6 +1,7 @@
-import {Client, Interaction} from "discord.js";
+import { Interaction} from "discord.js";
+import ExtendedClient from "../extendedClient";
 
-export = async (client: Client, data: Interaction) => {
+export = async (client: ExtendedClient, data: Interaction) => {
 
     if (data.isMessageComponent()) {
 
