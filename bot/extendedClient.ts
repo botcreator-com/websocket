@@ -49,7 +49,7 @@ class ExtendedClient extends Client {
             "repliedUser": false
         },
         "failIfNotExists": false,
-        "messageCacheLifetime": require("ms")("1m"),
+        "messageCacheLifetime": ms("1m"),
         "intents": [
             "GUILDS",
             "GUILD_MEMBERS",
