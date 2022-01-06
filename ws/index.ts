@@ -11,7 +11,7 @@ console.log(
 
 wss.on(
     "connection",
-    (ws: any, req: any) => {
+    (ws: WebSocket, req: any) => {
 
         console.log(
             "New connection",
