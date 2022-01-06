@@ -62,7 +62,7 @@ module.exports = {
         "key-spacing": "error",
         "keyword-spacing": "error",
         "line-comment-position": "off",
-        "linebreak-style": "error",
+        "linebreak-style": "off",
         "lines-around-comment": "error",
         "lines-between-class-members": "error",
         "max-classes-per-file": "error",
