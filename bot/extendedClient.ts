@@ -1,5 +1,4 @@
 "strict mode";
-import config from "./config.json";
 import {Client} from "discord.js";
 import WebSocket from "ws";
 import {workerData} from "worker_threads";
@@ -22,8 +21,6 @@ import {cpus, loadavg, totalmem} from "os";
 const guildInvites = new Map();
 class ExtendedClient extends Client {
 
-    config: any;
-
     functions: object;
 
     colors: object;
@@ -36,7 +33,7 @@ class ExtendedClient extends Client {
 
     myob: WebSocket;
 
-    constructor (tok: string) {
+    constructor (tok: string | undefined) {
 
         super({"partials": [
             "USER",
@@ -66,7 +63,6 @@ class ExtendedClient extends Client {
             "DIRECT_MESSAGE_REACTIONS",
             "DIRECT_MESSAGE_TYPING"
         ]});
-        this.config = config;
         this.functions = {
             "convert": function convert (number: number) {
 
@@ -303,7 +299,6 @@ class ExtendedClient extends Client {
                             ================================================================================================================================\n
                                 CPU: ${(loadavg()[0] / cpuCores).toFixed(2)}% / 100%\n
                                 RAM: ${Math.trunc(process.memoryUsage().heapUsed / 1000 / 1000)} MB / ${Math.trunc(totalmem() / 1000 / 1000)} MB
-                                Discord WebSocket Ping: ${this.ws.ping}\n
                                 ================================================================================================================================`);
 
                     }

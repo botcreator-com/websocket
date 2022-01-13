@@ -1,5 +1,7 @@
 import {Worker} from "worker_threads";
 import WebSocket from "ws";
+import dotenv from "dotenv";
+dotenv.config();
 const bot = (port: number) => {
 
         const worker = new Worker(
@@ -39,7 +41,7 @@ const bot = (port: number) => {
 
     },
 
-    webSocket = (port: number) => {
+    webSocket = (port?: number) => {
 
         const worker = new Worker(
             "./dist/ws/index.js",
@@ -74,17 +76,17 @@ const bot = (port: number) => {
             }
         );
 
-    };
+    },
+    port = process.env.PORT;
 
-if (process.argv[2]) {
+if (port) {
 
     webSocket(parseInt(
-        process.argv[2],
+        port,
         10
     ));
-
     bot(parseInt(
-        process.argv[2],
+        port,
         10
     ));
 
@@ -93,7 +95,7 @@ if (process.argv[2]) {
     console.log(`Node démarré en déféré (Bot et WebSocket non démarré,
          supposé démarré sur un autre serveur, 
          si ce n'est pas le cas précisé un port`);
-    const token = process.env.token || "Nothing",
+    const token: string = process.env.token || "Nothing",
         ws: WebSocket = new WebSocket(`wss://gateway.bot-creator.com/?token=${token}`);
     ws.onopen = () => {
 
