@@ -2,11 +2,15 @@ import {Worker} from "worker_threads";
 import WebSocket from "ws";
 import dotenv from "dotenv";
 dotenv.config();
-const bot = (port: number) => {
+interface bot {
+    port?: number,
+    token: string
+    }
+const bot = (globalData: bot) => {
 
         const worker = new Worker(
             "./dist/bot/index.js",
-            {"workerData": {port}}
+            {"workerData": globalData}
         );
 
         worker.on(
@@ -85,10 +89,18 @@ if (port) {
         port,
         10
     ));
-    bot(parseInt(
-        port,
-        10
-    ));
+    if (process.env.TOKEN) {
+
+        bot({
+            "port": parseInt(
+                port,
+                10
+            ),
+            "token": process.env.TOKEN
+        });
+
+    }
+
 
 } else {
 
