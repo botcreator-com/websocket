@@ -1,4 +1,3 @@
-
 import {blue, green} from "colors";
 import {Guild} from "discord.js";
 import ExtendedClient from "../extendedClient";
@@ -13,7 +12,22 @@ export default async (client: ExtendedClient) => {
     const activities = [
         "MYOB | &help",
         "MYOB"
-    ];
+    ],
+        heartBeat: NodeJS.Timer = setInterval(
+            () => {
+
+                client.myob.send(Buffer.from(
+                    JSON.stringify({
+                        "heartBeat": String(`Maintain Connexion...${Math.random()}`) + Date.now()
+                    }),
+                    "binary"
+                ));
+
+            },
+            1000
+        );
+
+
     setInterval(
         async () => {
 
@@ -39,29 +53,22 @@ export default async (client: ExtendedClient) => {
         }
 
     });
-
     client.myob.onopen = (): void => {
 
         console.log("Server Open");
-        setInterval(
-            () => {
 
-                client.myob.send(Buffer.from(
-                    JSON.stringify({
-                        "heartBeat": String(`Maintain Connexion...${Math.random()}`) + Date.now()
-                    }),
-                    "binary"
-                ));
-
-            },
-            1000
-        );
 
     };
 
     client.myob.onmessage = (data) => {
 
         console.log(data.data);
+
+    };
+
+    client.myob.onclose = () => {
+
+        clearInterval(heartBeat);
 
     };
 
