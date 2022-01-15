@@ -9,14 +9,18 @@ console.log(
     workerData.port
 );
 
+interface CustomSocket extends WebSocket {
+    isAlive: boolean
+}
+
 wss.on(
     "connection",
-    (ws: WebSocket, req: any) => {
-
+    (ws: CustomSocket, req: any) => {
         console.log(
             "New connection",
             req.socket.remoteAddress
         );
+        ws.on('pong',() => ws.isAlive = true);
         ws.on(
             "message",
             (data: WebSocketEventMap, isBinary: boolean) => {

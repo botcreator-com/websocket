@@ -107,20 +107,45 @@ if (port) {
     console.log(`Node démarré en déféré (Bot et WebSocket non démarré,
          supposé démarré sur un autre serveur, 
          si ce n'est pas le cas précisé un port`);
-    const token: string = process.env.token || "Nothing",
+    const token: string = process.env.TOKEN || "Nothing",
         ws: WebSocket = new WebSocket(`wss://gateway.bot-creator.com/?token=${token}`);
     ws.onopen = () => {
 
         console.log("Connexion ouverte");
 
     };
+    setInterval(
+        () => {
+
+            ws.send(Buffer.from(
+                JSON.stringify({
+                    "heartBeat": String(`Maintain Connexion...${Math.random()}`) + Date.now()
+                }),
+                "binary"
+            ));
+
+        },
+        1000
+    );
+
     ws.onerror = (err) => {
 
         console.log(
-            "Connexion fermé pour cause d'erreur.. Fin du processus",
+            "Une erreur c'est produite",
             err
         );
-        process.exit(15);
+
+    };
+
+    ws.onclose = () => {
+
+        console.log("Fermeture du WebSocket distant..");
+        webSocket(2050);
+        console.log("Démarrage du websocket en déféré");
+        bot({
+            "port": 2050,
+            token
+        });
 
     };
 

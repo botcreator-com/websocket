@@ -1,7 +1,6 @@
 
 import {blue, green} from "colors";
-import fetch from "node-fetch";
-import {Collection, Guild, Webhook} from "discord.js";
+import {Guild} from "discord.js";
 import ExtendedClient from "../extendedClient";
 export default async (client: ExtendedClient) => {
 
@@ -44,64 +43,25 @@ export default async (client: ExtendedClient) => {
     client.myob.onopen = (): void => {
 
         console.log("Server Open");
-        client.myob.send(JSON.stringify({
-            "message": "Guest",
-            "system": true,
-            "user": client.user,
-            "from": "bot"
-        }));
+        setInterval(
+            () => {
+
+                client.myob.send(Buffer.from(
+                    JSON.stringify({
+                        "heartBeat": String(`Maintain Connexion...${Math.random()}`) + Date.now()
+                    }),
+                    "binary"
+                ));
+
+            },
+            1000
+        );
 
     };
 
     client.myob.onmessage = (data) => {
 
-        if (typeof data.data === "string") {
-
-            const msg = JSON.parse(data.data);
-            if (msg.from !== "bot") {
-
-                let channel: any = client?.guilds?.cache.get("919356120466857984")?.channels?.cache?.get("919724869376159764");
-                channel?.fetchWebhooks().
-                    then((webhooks3: Collection<string, Webhook>) => {
-
-                        const web = webhooks3.filter((e: Webhook) => e.type === "Incoming").first();
-                        if (web) {
-
-                            fetch(
-                                `https://discord.com/api/webhooks/${web.id}/${web.token}`,
-                                {
-                                    "method": "post",
-                                    "headers": {
-                                        "Content-Type": "application/json"
-                                    },
-                                    "body": JSON.stringify({
-                                        "username": `${msg.user.username}#${msg.user.discriminator}`,
-                                        "avatar_url": `https://cdn.discordapp.com/avatars/${msg.user.id}/${msg.user.avatar}.png`,
-                                        "content": msg.message
-                                    })
-                                }
-                            );
-
-                        } else {
-
-                            channel = client?.guilds?.cache?.get("919356120466857984")?.channels?.cache?.get("919724869376159764");
-                            channel.createWebhook(
-                                `${msg.user.username}#${msg.user.discriminator}`,
-                                {
-                                    "avatar": `https://cdn.discordapp.com/avatars/${msg.user.id}/${msg.user.avatar}.png`,
-                                    "reason": `Création de webhook par : ${msg.user.username}#${msg.user.discriminator}`
-                                }
-                            ).
-                                then((e: Webhook) => e.send(msg.message));
-
-
-                        }
-
-                    });
-
-            }
-
-        }
+        console.log(data.data);
 
     };
 
