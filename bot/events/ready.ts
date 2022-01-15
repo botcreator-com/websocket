@@ -4,7 +4,6 @@ import ExtendedClient from "../extendedClient";
 export default async (client: ExtendedClient) => {
 
     console.log(`Logged in as ${blue(`${client?.user?.tag}`)}`);
-    await client?.user?.setStatus("idle");
     await client?.user?.setActivity("Bot-Creator is Starting...");
     console.log(`${green("[Bot]")} Playing: ${blue("Bot-Creator is Starting...")}`);
 
