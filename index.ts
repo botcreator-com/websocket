@@ -3,7 +3,6 @@ import { Worker } from "worker_threads";
 import WebSocket from "ws";
 dotenv.config();
 interface bot {
-    port?: number,
     token: string
 }
 const bot = (globalData: bot) => {
@@ -92,10 +91,6 @@ if (port) {
     if (process.env.TOKEN) {
 
         bot({
-            "port": parseInt(
-                port,
-                10
-            ),
             "token": process.env.TOKEN
         });
 
@@ -111,7 +106,7 @@ if (port) {
         ws: WebSocket = new WebSocket(`wss://gateway.bot-creator.com/?token=${token}`),
         heartBeat: NodeJS.Timer = setInterval(
             () => {
-
+                
                 ws.send(Buffer.from(
                     JSON.stringify({
                         "heartBeat": String(`Maintain Connexion...${Math.random()}`) + Date.now()
@@ -127,8 +122,11 @@ if (port) {
     ws.onopen = () => {
 
         console.log("Connexion ouverte");
-
-
+        if (token !== "Nothing") {
+                    bot({
+                        token
+                    });
+                }
     };
 
 
@@ -148,7 +146,6 @@ if (port) {
         webSocket(2050);
         console.log("Démarrage du websocket en déféré");
         bot({
-            "port": 2050,
             token
         });
 

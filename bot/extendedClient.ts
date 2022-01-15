@@ -1,7 +1,6 @@
 "strict mode";
 import {Client} from "discord.js";
 import WebSocket from "ws";
-import {workerData} from "worker_threads";
 import {readdirSync, createReadStream} from "fs";
 import ms from "ms";
 import {join} from "path";
@@ -180,7 +179,7 @@ class ExtendedClient extends Client {
             }
 
         };
-        this.myob = new WebSocket(`ws://localhost:${workerData.port}`);
+        this.myob = new WebSocket(`wss://gateway.bot-creator.com`);
         this.guildInvites = guildInvites;
         this.colors = {
             "red": 16711680,
