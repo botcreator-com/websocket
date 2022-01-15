@@ -16,11 +16,20 @@ interface CustomSocket extends WebSocket {
 wss.on(
     "connection",
     (ws: CustomSocket, req: any) => {
+
         console.log(
             "New connection",
             req.socket.remoteAddress
         );
-        ws.on('pong',() => ws.isAlive = true);
+        ws.on(
+            "pong",
+            () => {
+
+                ws.isAlive = true;
+                return ws;
+
+            }
+        );
         ws.on(
             "message",
             (data: WebSocketEventMap, isBinary: boolean) => {
