@@ -1,13 +1,11 @@
-import {blue, green} from "colors";
-import {Guild} from "discord.js";
+import { blue, green } from "colors";
+import { Guild } from "discord.js";
 import ExtendedClient from "../extendedClient";
 export default async (client: ExtendedClient) => {
 
     console.log(`Logged in as ${blue(`${client?.user?.tag}`)}`);
     await client?.user?.setActivity("Bot-Creator is Starting...");
     console.log(`${green("[Bot]")} Playing: ${blue("Bot-Creator is Starting...")}`);
-
-
     const activities = [
         "Bot-Creator | Manager",
         "Bot-Creator | Monite you",
@@ -24,17 +22,15 @@ export default async (client: ExtendedClient) => {
                     "binary"
                 ));
 
-            },
+},
             1000
         );
-
-
     setInterval(
         async () => {
 
             await client?.user?.setActivity(activities[Math.floor(Math.random() * activities.length)]);
 
-        },
+},
         120000
     );
     client.guilds.cache.forEach((guild: Guild) => {
@@ -49,28 +45,25 @@ export default async (client: ExtendedClient) => {
 
                     Error(err);
 
-                });
+});
 
-        }
+}
 
-    });
+});
     client.myob.onopen = (): void => {
 
         console.log("Server Open");
 
-
-    };
-
+};
     client.myob.onmessage = (data) => {
 
         console.log(data.data);
 
-    };
-
+};
     client.myob.onclose = () => {
 
         clearInterval(heartBeat);
 
-    };
+};
 
 };
