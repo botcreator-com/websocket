@@ -5,13 +5,15 @@ export default async (client: ExtendedClient) => {
 
     console.log(`Logged in as ${blue(`${client?.user?.tag}`)}`);
     await client?.user?.setStatus("idle");
-    await client?.user?.setActivity("MYOB is Starting...");
-    console.log(`${green("[Bot]")} Playing: ${blue("MYOB is Starting...")}`);
+    await client?.user?.setActivity("Bot-Creator is Starting...");
+    console.log(`${green("[Bot]")} Playing: ${blue("Bot-Creator is Starting...")}`);
 
 
     const activities = [
-        "MYOB | &help",
-        "MYOB"
+        "Bot-Creator | Manager",
+        "Bot-Creator | Monite you",
+        "Bot-Creator don't use any prefix..",
+        "Bot-Creator | I'm slash only"
     ],
         heartBeat: NodeJS.Timer = setInterval(
             () => {
