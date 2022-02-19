@@ -167,7 +167,7 @@ class ExtendedClient extends Client {
         }
         this.login(tok);
     }
-    async launch () {
+    async launch (): Promise<void> {
         console.log(blue("G-Bot Start"));
         await this._eventsHandler();
         await this._processEvent();
