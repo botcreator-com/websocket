@@ -1,4 +1,10 @@
 
+
+/**
+ * @param {number } time The time in milliseconds
+ * 
+ * @returns An array of number
+ */
 const parseMilliseconds = function (time) {
 
         return {
