@@ -20,7 +20,7 @@ import {cpus, loadavg, totalmem} from "os";
 const guildInvites = new Map();
 
 /**
- * @extends Client 
+ * @extends {Client} Client 
  * @constructor
  * @param { string } token - The token of the bot
  */
