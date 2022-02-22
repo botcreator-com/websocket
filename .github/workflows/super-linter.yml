@@ -18,3 +18,7 @@ jobs:
       run: npm ci
     - name: Run ESLint
       run: npm run lint
+    - name: Install TSC
+      run: npm i -g tsc
+    - name: Build TSC
+      run: tsc --build
