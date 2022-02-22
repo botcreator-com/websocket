@@ -18,6 +18,7 @@ import {
 } from "@discordjs/voice";
 import {cpus, loadavg, totalmem} from "os";
 const guildInvites = new Map();
+
 /**
  * @extends Client 
  * @constructor

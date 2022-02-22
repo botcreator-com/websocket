@@ -1,5 +1,6 @@
 import {InteractionButtonOptions} from "discord.js";
 import ExtendedClient from "../extendedClient";
+
 /**
  * @param {ExtendedClient} client - The client  Extended
  * @param {InteractionButtonOptions} button - The button parameter
