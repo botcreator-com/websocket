@@ -6,13 +6,9 @@ const server = createServer(),
 
 console.log( "Server started on port : ", workerData.port );
 
-interface CustomSocket extends WebSocket {
-    isAlive: boolean
-}
 
-wss.on( "connection", (ws: CustomSocket, req) => {
+wss.on( "connection", (ws, req) => {
         console.log( "New connection", req.headers["x-forwarded-for"]); 
-        ws.on( "pong", () => { ws.isAlive = true; return ws; } );
         ws.on( "message", (data, isBinary) => {                        
             console.log(data,isBinary);
             ws.emit("message",data);
