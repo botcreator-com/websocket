@@ -6,10 +6,6 @@ export default async (client: ExtendedClient, message: Message) => {
         if (message.author.bot) {
             return;
         }
-        await client?.myob.send(JSON.stringify({
-            "message": message.cleanContent,
-            "user": message.author,
-            "from": "bot"
-        }));
+        
     }
 };

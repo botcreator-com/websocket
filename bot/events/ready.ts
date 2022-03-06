@@ -11,20 +11,7 @@ export default async (client: ExtendedClient) => {
         "Bot-Creator | Monite you",
         "Bot-Creator don't use any prefix..",
         "Bot-Creator | I'm slash only"
-    ],
-        heartBeat: NodeJS.Timer = setInterval(
-            () => {
-
-                client.myob.send(Buffer.from(
-                    JSON.stringify({
-                        "heartBeat": String(`Maintain Connexion...${Math.random()}`) + Date.now()
-                    }),
-                    "binary"
-                ));
-
-},
-            1000
-        );
+    ];
     setInterval(
         async () => {
 
@@ -50,20 +37,5 @@ export default async (client: ExtendedClient) => {
 }
 
 });
-    client.myob.onopen = (): void => {
-
-        console.log("Server Open");
-
-};
-    client.myob.onmessage = (data) => {
-
-        console.log(data.data);
-
-};
-    client.myob.onclose = () => {
-
-        clearInterval(heartBeat);
-
-};
 
 };
