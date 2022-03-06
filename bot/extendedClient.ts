@@ -178,13 +178,6 @@ class ExtendedClient extends Client {
         await this._eventsHandler();
         await this._processEvent();
         await this._startingMessage();
-        this.WS.onopen = () => {
-            this.WS.send("Connected !")
-            console.log(`[${this?.user?.username}] Connection to WebSocket opened !`)
-        }
-        this.WS.onmessage = (event) => {
-            console.log(event.data);
-        }
      }
     public _eventsHandler () {
         let count = 0;
@@ -218,7 +211,7 @@ class ExtendedClient extends Client {
         const cpuCores = cpus().length;
         // Custom Starting Message
         text(
-            "Obvision",
+            "Bot !",
             {
                 "font": "Standard"
             },
@@ -230,7 +223,7 @@ class ExtendedClient extends Client {
                 }
                 const data2 = data;
                 text(
-                    "A General Bot for Discord",
+                    "Start..",
                     {
                     },
                     (err2, freeData) => {
