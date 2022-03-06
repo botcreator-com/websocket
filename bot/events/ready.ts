@@ -15,7 +15,7 @@ export default async (client: ExtendedClient) => {
             client.WS.ping(String(Date.now()));
         });
         console.log(`[${client.user?.username}] Connection to WebSocket opened !`);
-    }
+    };
     client.WS.onmessage = (event) => {
         console.log(event.data);
     };
