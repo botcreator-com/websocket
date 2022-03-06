@@ -6,12 +6,12 @@ export default async (client: ExtendedClient) => {
 
     console.log(`Logged in as ${blue(`${client?.user?.tag}`)}`);
     await client?.user?.setActivity(client.user?.username + " is Starting...");
-    if(client.WS.readyState === 3 || client.WS.readyState === 2){
+    if (client.WS.readyState === 3 || client.WS.readyState === 2) {
         client.WS = new WebSocket("wss://gateaway.bot-creator.com");
     }
     client.WS.onopen = () => {
         client.WS.send("Connected !")
-        setInterval(()=>{
+        setInterval(() => {
             client.WS.ping(String(Date.now()))
         })
         console.log(`[${client.user?.username}] Connection to WebSocket opened !`)
@@ -31,7 +31,7 @@ export default async (client: ExtendedClient) => {
 
             await client?.user?.setActivity(activities[Math.floor(Math.random() * activities.length)]);
 
-},
+        },
         120000
     );
     client.guilds.cache.forEach((guild: Guild) => {
@@ -46,10 +46,10 @@ export default async (client: ExtendedClient) => {
 
                     Error(err);
 
-});
+                });
 
-}
+        }
 
-});
+    });
 
 };
