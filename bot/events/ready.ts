@@ -5,21 +5,21 @@ import { WebSocket } from "ws";
 export default async (client: ExtendedClient) => {
 
     console.log(`Logged in as ${blue(`${client?.user?.tag}`)}`);
-    await client?.user?.setActivity(client.user?.username + " is Starting...");
+    await client?.user?.setActivity(`${client.user?.username} is Starting...`);
     if (client.WS.readyState === 3 || client.WS.readyState === 2) {
         client.WS = new WebSocket("wss://gateaway.bot-creator.com");
     }
     client.WS.onopen = () => {
-        client.WS.send("Connected !")
+        client.WS.send("Connected !");
         setInterval(() => {
-            client.WS.ping(String(Date.now()))
-        })
-        console.log(`[${client.user?.username}] Connection to WebSocket opened !`)
+            client.WS.ping(String(Date.now()));
+        });
+        console.log(`[${client.user?.username}] Connection to WebSocket opened !`);
     }
     client.WS.onmessage = (event) => {
         console.log(event.data);
-    }
-    console.log(`${green("[Bot]")} Playing: ${blue(client.user?.username + " is Starting...")}`);
+    };
+    console.log(`${green("[Bot]")} Playing: ${blue(`${client.user?.username} is Starting...`)}`);
     const activities = [
         "Bot-Creator | Manager",
         "Bot-Creator | Monite you",
