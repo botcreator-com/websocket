@@ -30,7 +30,7 @@ class ExtendedClient extends Client {
     guildInvites: Map<string, object | Map<string, object>>;
     footer: string;
     voc: object;
-    myob: WebSocket;
+    WS: WebSocket;
     constructor (tok: string | undefined) {
         super({"partials": [
             "USER",
@@ -145,7 +145,7 @@ class ExtendedClient extends Client {
                 return `${date.getFullYear()}-${`0${date.getMonth() + 1}`.slice(-2)}-${`0${date.getDate()}`.slice(-2)}`;
             }
         };
-        this.myob = new WebSocket("wss://gateway.bot-creator.com");
+        this.WS = new WebSocket("wss://gateway.bot-creator.com");
         this.guildInvites = guildInvites;
         this.colors = {
             "red": 16711680,
@@ -178,7 +178,14 @@ class ExtendedClient extends Client {
         await this._eventsHandler();
         await this._processEvent();
         await this._startingMessage();
-    }
+        this.WS.onopen = () => {
+            this.WS.send("Connected !")
+            console.log(`[${this?.user?.username}] Connection to WebSocket opened !`)
+        }
+        this.WS.onmessage = (event) => {
+            console.log(event.data);
+        }
+     }
     public _eventsHandler () {
         let count = 0;
         const files = readdirSync(join(
