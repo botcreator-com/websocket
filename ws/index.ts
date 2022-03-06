@@ -11,11 +11,12 @@ interface CustomSocket extends WebSocket {
 }
 
 wss.on( "connection", (ws: CustomSocket, req) => {
-        console.log( "New connection", req.socket.remoteAddress ); 
+        console.log( "New connection", req.headers["X-Forwarded-For"]); 
         ws.on( "pong", () => { ws.isAlive = true; return ws; } );
         ws.on( "message", (data, isBinary) => {
                 wss.clients.forEach((client) => {
                     if (client.readyState === WebSocket.OPEN) {
+                        console.log(data,isBinary);
                         client.send( data, {"binary": isBinary} );
                     }
                 });
