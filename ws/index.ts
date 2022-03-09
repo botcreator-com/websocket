@@ -1,3 +1,4 @@
+/* eslint-disable prefer-arrow-callback */
 import WebSocket, { WebSocketServer } from "ws";
 import { createServer } from "http";
 import { workerData } from "worker_threads";
@@ -7,26 +8,16 @@ const server = createServer(),
 console.log("Server started on port : ", workerData.port);
 
 
-wss.on("connection", (ws, req) => {
+wss.on("connection", (ws: WebSocket, req) => {
     console.log("New connection", req.headers["x-forwarded-for"]);
     ws.on("message", (data) => {
-        console.log(data);
-        ws.emit("message", data);
-
-        /*
-         *Wss.clients.forEach((client) => {
-         *  if (client.readyState === WebSocket.OPEN) {
-         *      client.send(data, (err) => console.log(err));
-         *  }
-         *});
-         */
-        }
-    );
+        console.log(`Received message ${data}`);
+      });
    }
 );
 
 server.on("upgrade", (request, socket, head) => {
-    wss.handleUpgrade(request, socket, head, (ws) => {
+    wss.handleUpgrade(request, socket, head, function done(ws: WebSocket){
         wss.emit("connection", ws, request);
     });
 }
