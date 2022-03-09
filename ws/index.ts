@@ -13,6 +13,7 @@ wss.on("connection", (ws: WebSocket, req) => {
         wss.clients.forEach(function each(client) {
             if (client.readyState === WebSocket.OPEN) {
                 client.send(data, { binary: isBinary });
+                console.log(data);
             }
         });
     });
