@@ -8,7 +8,7 @@ console.log("Server started on port : ", workerData.port);
 
 
 wss.on("connection", (ws: WebSocket, req) => {
-    ws.send("Salut, ça va");
+    ws.emit("message", "Salut, ça va");
     console.log("New connection", req.headers["x-forwarded-for"]);
     ws.on("message", (data: string) => {
         console.log(data);
