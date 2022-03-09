@@ -7,18 +7,22 @@ const server = createServer(),
 console.log("Server started on port : ", workerData.port);
 
 
-wss.on("connection", (ws: WebSocket, req) => {
+wss.on("connection", (ws, req) => {
     console.log("New connection", req.headers["x-forwarded-for"]);
-    ws.on("message", (data: string) => {
+    ws.on("message", (data) => {
+        console.log(data);
         ws.emit("message", data);
-        wss.clients.forEach((client) => {
-            if (client.readyState === WebSocket.OPEN) {
-                client.send(data, (err) => console.log(err));
-            }
-        });
-    }
+
+        /*
+         *Wss.clients.forEach((client) => {
+         *  if (client.readyState === WebSocket.OPEN) {
+         *      client.send(data, (err) => console.log(err));
+         *  }
+         *});
+         */
+        }
     );
-}
+   }
 );
 
 server.on("upgrade", (request, socket, head) => {
