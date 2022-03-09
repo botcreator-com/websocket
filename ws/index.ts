@@ -1,32 +1,32 @@
-import WebSocket, {WebSocketServer} from "ws";
-import {createServer} from "http";
-import {workerData} from "worker_threads";
+import WebSocket, { WebSocketServer } from "ws";
+import { createServer } from "http";
+import { workerData } from "worker_threads";
 const server = createServer(),
-    wss = new WebSocketServer({"noServer": true});
+    wss = new WebSocketServer({ "noServer": true });
 
-console.log( "Server started on port : ", workerData.port );
+console.log("Server started on port : ", workerData.port);
 
 
-wss.on( "connection", (ws, req) => {
-        console.log( "New connection", req.headers["x-forwarded-for"]); 
-        ws.on( "message", (data, isBinary) => {                        
-            console.log(data,isBinary);
-            ws.emit("message",data);
-                wss.clients.forEach((client) => {
-                    if (client.readyState === WebSocket.OPEN) {
-                        client.send( data, {"binary": isBinary} );
-                    }
-                });
+wss.on("connection", (ws: WebSocket, req) => {
+    console.log("New connection", req.headers["x-forwarded-for"]);
+    ws.on("message", (data: string) => {
+        console.log(data);
+        ws.emit("message", data);
+        wss.clients.forEach((client) => {
+            if (client.readyState === WebSocket.OPEN) {
+                client.send(data);
             }
-        );
+        });
     }
+    );
+}
 );
 
-server.on( "upgrade", (request, socket, head) => {
-        wss.handleUpgrade( request, socket, head, () => {
-                wss.emit( "connection", socket, request );
-            }
-        );
+server.on("upgrade", (request, socket, head) => {
+    wss.handleUpgrade(request, socket, head, () => {
+        wss.emit("connection", socket, request);
     }
+    );
+}
 );
 server.listen(workerData.port);
