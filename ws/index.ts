@@ -7,24 +7,24 @@ const server = createServer(),
 console.log("Server started on port : ", workerData.port);
 
 
-wss.on("connection", (ws) => {
-    ws.on("message", (data, isBinary) => {
-        console.log(data);
-      wss.clients.forEach((client) => {
-        if (client.readyState === WebSocket.OPEN) {
-            if (client !== ws && client.readyState === WebSocket.OPEN) {
-                client.send(data, { "binary": isBinary });
-              }
-        }
-      });
-    });
-  });
-
-server.on("upgrade", (request, socket, head) => {
-    wss.handleUpgrade(request, socket, head, () => {
-        wss.emit("connection", socket, request);
+wss.on("connection", (ws: WebSocket, req) => {
+    console.log("New connection", req.headers["x-forwarded-for"]);
+    ws.on("message", (data: string) => {
+        ws.emit("message", data);
+        wss.clients.forEach((client) => {
+            if (client.readyState === WebSocket.OPEN) {
+                client.send(data, (err) => console.log(err));
+            }
+        });
     }
     );
+}
+);
+
+server.on("upgrade", (request, socket, head) => {
+    wss.handleUpgrade(request, socket, head, (ws) => {
+        wss.emit("connection", ws, request);
+    });
 }
 );
 server.listen(workerData.port);
