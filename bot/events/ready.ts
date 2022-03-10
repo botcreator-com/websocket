@@ -13,7 +13,7 @@ export default async (client: ExtendedClient) => {
         "Bot-Creator | Monite you",
         "Bot-Creator don't use any prefix..",
         "Bot-Creator | I'm slash only"
-    ];
+    ], ws = new WebSocket("wss://gateway.bot-creator.com");
     setInterval(
         async () => {
 
@@ -22,7 +22,7 @@ export default async (client: ExtendedClient) => {
         },
         120000
     );
-    const ws = new WebSocket("wss://gateway.bot-creator.com");
+   
     ws.onopen = () => {
         ws.send("Connected !");
         setInterval(() => {

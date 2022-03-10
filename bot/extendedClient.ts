@@ -1,6 +1,5 @@
 "strict mode";
 import {Client} from "discord.js";
-import WebSocket from "ws";
 import {readdirSync, createReadStream} from "fs";
 import ms from "ms";
 import {join} from "path";
