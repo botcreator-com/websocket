@@ -6,7 +6,7 @@ export default async (client: ExtendedClient) => {
 
     console.log(`Logged in as ${blue(`${client?.user?.tag}`)}`);
     await client?.user?.setActivity(`${client.user?.username} is Starting...`);
-    
+
     console.log(`${green("[Bot]")} Playing: ${blue(`${client.user?.username} is Starting...`)}`);
     const activities = [
         "Bot-Creator | Manager",
@@ -22,11 +22,11 @@ export default async (client: ExtendedClient) => {
         },
         120000
     );
-    let ws = new WebSocket("wss://gateway.bot-creator.com");
+    const ws = new WebSocket("wss://gateway.bot-creator.com");
     ws.onopen = () => {
         ws.send("Connected !");
         setInterval(() => {
-           ws.ping(String(Date.now()));
+            ws.ping(String(Date.now()));
         });
         console.log(`[${client.user?.username}] Connection to WebSocket opened !`);
     };
