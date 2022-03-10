@@ -6,16 +6,7 @@ export default async (client: ExtendedClient) => {
 
     console.log(`Logged in as ${blue(`${client?.user?.tag}`)}`);
     await client?.user?.setActivity(`${client.user?.username} is Starting...`);
-    client.WS.onopen = () => {
-        client.WS.send("Connected !");
-        setInterval(() => {
-            client.WS.ping(String(Date.now()));
-        });
-        console.log(`[${client.user?.username}] Connection to WebSocket opened !`);
-    };
-    client.WS.onmessage = (event) => {
-        console.log(event.data);
-    };
+    
     console.log(`${green("[Bot]")} Playing: ${blue(`${client.user?.username} is Starting...`)}`);
     const activities = [
         "Bot-Creator | Manager",
@@ -31,6 +22,17 @@ export default async (client: ExtendedClient) => {
         },
         120000
     );
+    let ws = new WebSocket("wss://gateway.bot-creator.com");
+    ws.onopen = () => {
+        ws.send("Connected !");
+        setInterval(() => {
+           ws.ping(String(Date.now()));
+        });
+        console.log(`[${client.user?.username}] Connection to WebSocket opened !`);
+    };
+    ws.onmessage = (event) => {
+        console.log(event.data);
+    };
     client.guilds.cache.forEach((guild: Guild) => {
 
         if (guild?.me?.permissions.has("MANAGE_GUILD")) {

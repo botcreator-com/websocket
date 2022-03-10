@@ -30,7 +30,6 @@ class ExtendedClient extends Client {
     guildInvites: Map<string, object | Map<string, object>>;
     footer: string;
     voc: object;
-    WS: WebSocket;
     constructor (tok: string | undefined) {
         super({"partials": [
             "USER",
@@ -145,7 +144,6 @@ class ExtendedClient extends Client {
                 return `${date.getFullYear()}-${`0${date.getMonth() + 1}`.slice(-2)}-${`0${date.getDate()}`.slice(-2)}`;
             }
         };
-        this.WS = new WebSocket("wss://gateway.bot-creator.com");
         this.guildInvites = guildInvites;
         this.colors = {
             "red": 16711680,
@@ -242,6 +240,7 @@ class ExtendedClient extends Client {
                 );
             }
         );
+       
     }
 
     public _processEvent () {
