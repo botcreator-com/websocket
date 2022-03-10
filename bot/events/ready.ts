@@ -6,12 +6,6 @@ export default async (client: ExtendedClient) => {
 
     console.log(`Logged in as ${blue(`${client?.user?.tag}`)}`);
     await client?.user?.setActivity(`${client.user?.username} is Starting...`);
-    setInterval(() => {
-        if (client.WS.readyState === 3 || client.WS.readyState === 2) {
-        client.WS = new WebSocket("wss://gateaway.bot-creator.com");
-        }
-    }, 10000);
-    console.log(client.WS.readyState);
     client.WS.onopen = () => {
         client.WS.send("Connected !");
         setInterval(() => {
