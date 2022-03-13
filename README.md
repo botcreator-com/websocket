@@ -17,11 +17,11 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-[![Contributors][contributors-shield]](https://github.com/garder500/bc-bot-and-ws/graphs/contributors)
-[![Forks][forks-shield]](https://github.com/garder500/bc-bot-and-ws)
-[![Stargazers][stars-shield]](https://github.com/garder500/bc-bot-and-ws)
-[![Issues][issues-shield]](https://github.com/garder500/bc-bot-and-ws/issues)
-[![MIT License][license-shield]](https://github.com/garder500/bc-bot-and-ws/blob/master/LICENSE)
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
 [![CodeQL](https://github.com/garder500/bc-bot-and-ws/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/garder500/bc-bot-and-ws/actions/workflows/codeql-analysis.yml) 
 [![Lint Code Base](https://github.com/garder500/bc-bot-and-ws/actions/workflows/super-linter.yml/badge.svg)](https://github.com/garder500/bc-bot-and-ws/actions/workflows/super-linter.yml)
 
@@ -81,8 +81,6 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `garder500`, `site`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
 
