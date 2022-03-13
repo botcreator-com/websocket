@@ -1,5 +1,5 @@
 import { blue, green } from "colors";
-import { Guild, Message } from "discord.js";
+import { Guild } from "discord.js";
 import ExtendedClient from "../extendedClient";
 import { WebSocket } from "ws";
 
@@ -33,7 +33,7 @@ export default async (client: ExtendedClient) => {
         console.log(`[${client.user?.username}] Connection to WebSocket opened !`);
     };
     ws.onmessage = (data) => { 
-        client.emit("rawDataFromBotCreator",data.data);
+        client.emit("rawDataFromBotCreator", data.data);
     };
     client.guilds.cache.forEach((guild: Guild) => {
 
