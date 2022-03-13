@@ -175,7 +175,7 @@ Project Link: [https://github.com/garder500/bc-bot-and-ws](https://github.com/ga
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/garder500/site.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/garder500/bc-bot-and-ws.svg?style=for-the-badge
 [contributors-url]: https://github.com/garder500/bc-bot-and-ws/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/garder500/bc-bot-and-ws.svg?style=for-the-badge
 [forks-url]: https://github.com/garder500/bc-bot-and-ws/network/members
