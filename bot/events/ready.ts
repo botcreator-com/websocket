@@ -2,6 +2,10 @@ import { blue, green } from "colors";
 import { Guild } from "discord.js";
 import ExtendedClient from "../extendedClient";
 import { WebSocket } from "ws";
+import Emitter from "../Emitter";
+
+let EventHandler = new Emitter;
+
 export default async (client: ExtendedClient) => {
 
     console.log(`Logged in as ${blue(`${client?.user?.tag}`)}`);
@@ -31,8 +35,8 @@ export default async (client: ExtendedClient) => {
         });
         console.log(`[${client.user?.username}] Connection to WebSocket opened !`);
     };
-    ws.onmessage = (event) => {
-        console.log(event.data);
+    ws.onmessage = (data) => {
+        EventHandler.emit("message",data.data);
     };
     client.guilds.cache.forEach((guild: Guild) => {
 
