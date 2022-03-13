@@ -1,5 +1,9 @@
 <div id="top"></div>
-
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![Apache 2][license-shield]][license-url]
 [![CodeQL](https://github.com/garder500/bc-bot-and-ws/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/garder500/bc-bot-and-ws/actions/workflows/codeql-analysis.yml) 
 [![Lint Code Base](https://github.com/garder500/bc-bot-and-ws/actions/workflows/super-linter.yml/badge.svg)](https://github.com/garder500/bc-bot-and-ws/actions/workflows/super-linter.yml)
 
@@ -172,13 +176,13 @@ Project Link: [https://github.com/garder500/bc-bot-and-ws](https://github.com/ga
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/garder500/site.svg?style=for-the-badge
 [contributors-url]: https://github.com/garder500/bc-bot-and-ws/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/garder500/site.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/garder500/bc-bot-and-ws.svg?style=for-the-badge
 [forks-url]: https://github.com/garder500/bc-bot-and-ws/network/members
-[stars-shield]: https://img.shields.io/github/stars/garder500/site.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/garder500/bc-bot-and-ws.svg?style=for-the-badge
 [stars-url]: https://github.com/garder500/bc-bot-and-ws/stargazers
-[issues-shield]: https://img.shields.io/github/issues/garder500/site.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/garder500/bc-bot-and-ws?style=for-the-badge
 [issues-url]: https://github.com/garder500/bc-bot-and-ws/issues
-[license-shield]: https://img.shields.io/github/license/garder500/site.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/garder500/bc-bot-and-ws.svg?style=for-the-badge
 [license-url]: https://github.com/garder500/bc-bot-and-ws/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/linkedin_username
