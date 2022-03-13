@@ -17,11 +17,11 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-[![Contributors][contributors-shield]][https://github.com/garder500/bc-bot-and-ws/graphs/contributors]
-[![Forks][forks-shield]][https://github.com/garder500/bc-bot-and-ws]
-[![Stargazers][stars-shield]][https://github.com/garder500/bc-bot-and-ws]
-[![Issues][issues-shield]][https://github.com/garder500/bc-bot-and-ws/issues]
-[![MIT License][license-shield]][https://github.com/garder500/bc-bot-and-ws/blob/master/LICENSE]
+[![Contributors][contributors-shield]](https://github.com/garder500/bc-bot-and-ws/graphs/contributors)
+[![Forks][forks-shield]](https://github.com/garder500/bc-bot-and-ws)
+[![Stargazers][stars-shield]](https://github.com/garder500/bc-bot-and-ws)
+[![Issues][issues-shield]](https://github.com/garder500/bc-bot-and-ws/issues)
+[![MIT License][license-shield]](https://github.com/garder500/bc-bot-and-ws/blob/master/LICENSE)
 [![CodeQL](https://github.com/garder500/bc-bot-and-ws/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/garder500/bc-bot-and-ws/actions/workflows/codeql-analysis.yml) 
 [![Lint Code Base](https://github.com/garder500/bc-bot-and-ws/actions/workflows/super-linter.yml/badge.svg)](https://github.com/garder500/bc-bot-and-ws/actions/workflows/super-linter.yml)
 
