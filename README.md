@@ -51,7 +51,6 @@
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -69,7 +68,8 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 ### Built With
 
 * [discord.js](https://discord.js.org/)
-* [WebSocket](https://npmjs.org/packages/ws)
+* [WebSocket](https://www.npmjs.com/package/ws)
+* [Lavalink](https://github.com/freyacodes/Lavalink)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -91,7 +91,7 @@ This is an example of how to list things you need to use the software and how to
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
+1. Get a Token at [discord.com](https://discord.com/developers/applications)
 2. Clone the repo
    ```sh
    git clone https://github.com/garder500/bc-bot-and-ws.git
@@ -100,9 +100,9 @@ This is an example of how to list things you need to use the software and how to
    ```sh
    npm install
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
+4. Make a file called .env and add :
+   ```conf
+   TOKEN = YOUR-TOKEN-HERE
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -112,9 +112,7 @@ This is an example of how to list things you need to use the software and how to
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
+_(In redaction..)_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -123,10 +121,9 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
+- [x] WebSocket
+- [ ] Discord Bot
+- [ ] Can Play Music
 
 See the [open issues](https://github.com/garder500/bc-bot-and-ws/issues) for a full list of proposed features (and known issues).
 
@@ -155,7 +152,7 @@ Don't forget to give the project a star! Thanks again!
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the MIT License. See `LICENSE` for more information.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -164,23 +161,11 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Garder500 - [@Garder500](https://twitter.com/garder500) - contact@bot-creator.com
 
 Project Link: [https://github.com/garder500/bc-bot-and-ws](https://github.com/garder500/bc-bot-and-ws)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-* []()
-* []()
-* []()
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
