@@ -33,16 +33,19 @@ export default async (client: ExtendedClient) => {
         console.log(`[${client.user?.username}] Connection to WebSocket opened !`);
     };
     ws.onmessage = (data) => {         
-        client.emit("rawDataFromBotCreator", data.data);
         try {
             const JsonRaw = JSON.parse(String(data.data));
             if (JsonRaw.event === "stop"){
-                if (JsonRaw.id === client?.user?.id){
+                if (JsonRaw.id === client?.user?.id){   
+                    client.emit("rawDataFromBotCreator", data.data);
                     process.exit();
                 }
             }
-        } catch (e: any){
-            client.emit("error", e);
+        } catch (e){
+            if(1==1){
+                let xyzsfdfsf =0, dfsfsfsfd: boolean =false;
+                dfsfsfsfd = xyzsfdfsf ? true : false;
+            }
         }
     };
     client.guilds.cache.forEach((guild: Guild) => {
