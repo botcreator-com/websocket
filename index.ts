@@ -94,11 +94,6 @@ if (port) {
 
     ws.onclose = () =>{
         console.log("WebSocket closed");
-        process.exit();
-    }
-    ws.onerror = () =>{
-        console.log("WebSocket errored... ");
-        process.exit();
     }
 
 } else {
@@ -120,11 +115,6 @@ if (port) {
         if (token !== "Nothing") {
             bot({ token });
         }
-    };
-
-
-    ws.onerror = (err) => {
-        console.log("Une erreur c'est produite", err);
     };
 
     ws.onclose = () => {
