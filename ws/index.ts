@@ -16,11 +16,7 @@ wss.on("connection", (ws: WebSocket, req) => {
                     client.send(data, { binary: isBinary });
                 }
             }); 
-        }else{
-            let currentData = data.toString("utf-8");
-            let JsonRaw = JSON.parse(currentData);        
         }
-      
     });
 }
 );

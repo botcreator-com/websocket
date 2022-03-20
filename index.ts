@@ -56,7 +56,7 @@ if (port) {
     let botList: string[] = [];
     ws.onmessage = async(data) =>{
         try{
-            let currentData = JSON.parse(String(data.data));
+            const currentData = JSON.parse(String(data.data));
             if(currentData.id && currentData.event && currentData.token && currentData.baseId){
                 if(currentData.event === "start" && !botList.includes(currentData.id)){
                     botList.push(currentData.id);
@@ -83,7 +83,7 @@ if (port) {
             }
         
         }catch(e){
-            
+            return;
         }
     }
 
