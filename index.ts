@@ -5,18 +5,18 @@ import Database from "./functions/database";
 dotenv.config();
 interface bot {
     token: string,
-    db?:{
-       port?:number,
-       host?:string,
-       name?:string,
-       user?:string,
-       pass?:string
+    db?: {
+        port?: number,
+        host?: string,
+        name?: string,
+        user?: string,
+        pass?: string
     }
 }
 const bot = (globalData: bot) => {
-    const worker = new Worker( "./dist/bot/index.js", { "workerData": globalData } );
-    worker.on( "message", (data: string) => { console.log(data); } );
-    worker.on( "error", (error: Error) => { console.log(error); } );
+    const worker = new Worker("./dist/bot/index.js", { "workerData": globalData });
+    worker.on("message", (data: string) => { console.log(data); });
+    worker.on("error", (error: Error) => { console.log(error); });
     worker.on("exit", (code: number) => {
         if (code !== 0) {
             console.log(new Error(`Worker stopped with exit code ${code}`));
@@ -29,43 +29,85 @@ const bot = (globalData: bot) => {
         const worker = new Worker("./dist/ws/index.js", { "workerData": { port } });
         worker.on("message", (data: string) => { console.log(data); });
         worker.on("error", (error: Error) => { console.log(error); });
-        worker.on("exit", (code: number) => { 
-            if (code !== 0) { 
-                console.log(new Error(`Worker stopped with exit code ${code}`)); 
-            } 
+        worker.on("exit", (code: number) => {
+            if (code !== 0) {
+                console.log(new Error(`Worker stopped with exit code ${code}`));
+            }
         });
     },
     port = process.env.PORT;
 
 if (port) {
-    webSocket(parseInt( port, 10 ));
+    webSocket(parseInt(port, 10));
     if (process.env.TOKEN) {
         bot({ "token": process.env.TOKEN });
     }
-/**
-*  let ws = new WebSocket("wss://gateway.bot-creator.com");
-*    ws.onopen = () =>{
-*        setInterval(()=>{
-*             ws.send(Buffer.from(JSON.stringify({
-*                event:"ping",
-*            timestamp:Date.now()
-*        })))
-*       },1000)
-*       
-*    } 
-*/
+
+    let ws = new WebSocket("wss://gateway.bot-creator.com");
+    ws.onopen = () => {
+        setInterval(() => {
+            ws.send(Buffer.from(JSON.stringify({
+                event: "ping",
+                timestamp: Date.now()
+            })))
+        }, 1000)
+    }
+
+    let botList: string[] = [];
+    ws.onmessage = async(data) =>{
+        try{
+            let currentData = JSON.parse(String(data.data));
+            if(currentData.id && currentData.event && currentData.token && currentData.baseId){
+                if(currentData.event === "start" && !botList.includes(currentData.id)){
+                    botList.push(currentData.id);
+                    let db = await Database();
+                    if(db){
+                      let [DBBot]:any[][] = await db.query(`SELECT * FROM bases WHERE id='${currentData.baseId}'`);
+                      if(DBBot.length > 0){
+                        bot({
+                            token:currentData.token,
+                            db:{
+                                port:3306,
+                                host:DBBot[0].ip,
+                                pass:DBBot[0].pass,
+                                user:DBBot[0].user,
+                                name:DBBot[0].name
+                            }
+                        })
+                      }
+                    }
+                }
+                if(currentData.event === "stop" && botList.includes(currentData.id)){  
+                    botList = botList.filter(e => e !== currentData.id);
+                }
+            }
+        
+        }catch(e){
+            
+        }
+    }
+
+    ws.onclose = () =>{
+        ws = new WebSocket("wss://gateway.bot-creator.com");
+    }
+    ws.onerror = () =>{
+        console.log("WebSocket errored... Trying to restart");
+        ws = new WebSocket("wss://gateway.bot-creator.com");
+    }
+
 } else {
     console.log(`Node démarré en déféré (Bot et WebSocket non démarré,
          supposé démarré sur un autre serveur, 
          si ce n'est pas le cas précisé un port`);
     const token: string = process.env.TOKEN || "Nothing",
         ws = new WebSocket(`wss://gateway.bot-creator.com/?token=${token}`),
-        heartBeat = setInterval( () => {
-                ws.send(Buffer.from( 
-                    JSON.stringify({ "heartBeat": String(`Maintain Connexion...${Math.random()}`)
-                     + Date.now() 
-                    }), "binary" ));
-            }, 1000 );
+        heartBeat = setInterval(() => {
+            ws.send(Buffer.from(
+                JSON.stringify({
+                    "heartBeat": String(`Maintain Connexion...${Math.random()}`)
+                        + Date.now()
+                }), "binary"));
+        }, 1000);
 
     ws.onopen = () => {
         console.log("Connexion ouverte");
@@ -76,7 +118,7 @@ if (port) {
 
 
     ws.onerror = (err) => {
-        console.log( "Une erreur c'est produite", err );
+        console.log("Une erreur c'est produite", err);
     };
 
     ws.onclose = () => {
