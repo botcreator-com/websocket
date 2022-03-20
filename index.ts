@@ -96,8 +96,7 @@ if (port) {
         ws = new WebSocket("wss://gateway.bot-creator.com");
     }
     ws.onerror = () =>{
-        console.log("WebSocket errored... Trying to restart");
-        ws = new WebSocket("wss://gateway.bot-creator.com");
+        console.log("WebSocket errored... ");
     }
 
 } else {
