@@ -45,6 +45,7 @@ if (port) {
 
     let ws = new WebSocket("wss://gateway.bot-creator.com");
     ws.onopen = () => {
+        console.log("WebSocket as started")
         setInterval(() => {
             ws.send(Buffer.from(JSON.stringify({
                 event: "ping",
