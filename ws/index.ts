@@ -10,7 +10,7 @@ console.log("Server started on port : ", workerData.port);
 wss.on("connection", (ws: WebSocket, req) => {
     console.log("New connection", req.headers["x-forwarded-for"]);
     ws.on("message", (data, isBinary) => { 
-        if(typeof data === "string"){
+        if(!isBinary){
              wss.clients.forEach(function each(client) {
             if (client.readyState === WebSocket.OPEN && client !== ws) {
                 client.send(data, { binary: isBinary });
