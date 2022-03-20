@@ -41,8 +41,8 @@ export default async (client: ExtendedClient) => {
                     process.exit();
                 }
             }
-        } catch (e){
-            return;
+        } catch (e: any){
+            client.emit("error", e);
         }
     };
     client.guilds.cache.forEach((guild: Guild) => {
