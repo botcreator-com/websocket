@@ -93,10 +93,12 @@ if (port) {
     }
 
     ws.onclose = () =>{
-        ws = new WebSocket("wss://gateway.bot-creator.com");
+        console.log("WebSocket closed");
+        process.exit();
     }
     ws.onerror = () =>{
         console.log("WebSocket errored... ");
+        process.exit();
     }
 
 } else {
