@@ -7,7 +7,7 @@
         "test": "echo 'All test passed'",
         "lint": "eslint ./bot/**/*.ts",
         "eslint": "eslint ./**/*.ts",
-        "start": "node ./dist/index.js"
+        "start": "node ."
     },
     "author": "garder500",
     "license": "ISC",
