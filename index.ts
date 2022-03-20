@@ -42,8 +42,8 @@ if (port) {
     if (process.env.TOKEN) {
         bot({ "token": process.env.TOKEN });
     }
-
-    let ws = new WebSocket("wss://gateway.bot-creator.com");
+setTimeout(()=>{
+ let ws = new WebSocket("wss://gateway.bot-creator.com");
     ws.onopen = () => {
         console.log("WebSocket as started")
         setInterval(() => {
@@ -95,6 +95,8 @@ if (port) {
     ws.onclose = () =>{
         console.log("WebSocket closed");
     }
+},20000)
+   
 
 } else {
     console.log(`Node démarré en déféré (Bot et WebSocket non démarré,
