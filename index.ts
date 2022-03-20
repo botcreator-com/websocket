@@ -58,26 +58,30 @@ if (port) {
         try{
             const currentData = JSON.parse(String(data.data));
             if(currentData.id && currentData.event && currentData.token && currentData.baseId){
+                console.log("Bot received")
                 if(currentData.event === "start" && !botList.includes(currentData.id)){
+                    console.log("Bot not in list")
                     botList.push(currentData.id);
                     let db = await Database();
                     if(db){
                       let [DBBot]:any[][] = await db.query(`SELECT * FROM bases WHERE id='${currentData.baseId}'`);
                       if(DBBot.length > 0){
+                          console.log("Bot starting...")
                         bot({
-                            token:currentData.token,
-                            db:{
-                                port:3306,
-                                host:DBBot[0].ip,
-                                pass:DBBot[0].pass,
-                                user:DBBot[0].user,
-                                name:DBBot[0].name
+                            "token":currentData.token,
+                            "db":{
+                                "port":3306,
+                                "host":DBBot[0].ip,
+                                "pass":DBBot[0].pass,
+                                "user":DBBot[0].user,
+                                "name":DBBot[0].name
                             }
                         })
                       }
                     }
                 }
                 if(currentData.event === "stop" && botList.includes(currentData.id)){  
+                    console.log("Bot stopping..")
                     botList = botList.filter(e => e !== currentData.id);
                 }
             }
