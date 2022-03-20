@@ -1,9 +1,17 @@
 import dotenv from "dotenv";
 import { Worker } from "worker_threads";
 import WebSocket from "ws";
+import Database from "./functions/database";
 dotenv.config();
 interface bot {
-    token: string
+    token: string,
+    db?:{
+       port?:number,
+       host?:string,
+       name?:string,
+       user?:string,
+       pass?:string
+    }
 }
 const bot = (globalData: bot) => {
     const worker = new Worker( "./dist/bot/index.js", { "workerData": globalData } );
@@ -34,13 +42,25 @@ if (port) {
     if (process.env.TOKEN) {
         bot({ "token": process.env.TOKEN });
     }
+/**
+*  let ws = new WebSocket("wss://gateway.bot-creator.com");
+*    ws.onopen = () =>{
+*        setInterval(()=>{
+*             ws.send(Buffer.from(JSON.stringify({
+*                event:"ping",
+*            timestamp:Date.now()
+*        })))
+*       },1000)
+*       
+*    } 
+*/
 } else {
     console.log(`Node démarré en déféré (Bot et WebSocket non démarré,
          supposé démarré sur un autre serveur, 
          si ce n'est pas le cas précisé un port`);
     const token: string = process.env.TOKEN || "Nothing",
-        ws: WebSocket = new WebSocket(`wss://gateway.bot-creator.com/?token=${token}`),
-        heartBeat: NodeJS.Timer = setInterval( () => {
+        ws = new WebSocket(`wss://gateway.bot-creator.com/?token=${token}`),
+        heartBeat = setInterval( () => {
                 ws.send(Buffer.from( 
                     JSON.stringify({ "heartBeat": String(`Maintain Connexion...${Math.random()}`)
                      + Date.now() 
