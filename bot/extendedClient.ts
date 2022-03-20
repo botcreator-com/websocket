@@ -171,10 +171,9 @@ class ExtendedClient extends Client {
         this.login(tok);
     }
     async launch (): Promise<void> {
-        console.log(blue("G-Bot Start"));
+        console.log(blue("A bot is Starting"));
         await this._eventsHandler();
         await this._processEvent();
-        await this._startingMessage();
      }
     public _eventsHandler () {
         let count = 0;
@@ -203,43 +202,6 @@ class ExtendedClient extends Client {
             }
         });
         console.log(`${green("[Events]")} Loaded ${count}/${files.length} events`);
-    }
-    public _startingMessage () {
-        const cpuCores = cpus().length;
-        // Custom Starting Message
-        text(
-            "Bot !",
-            {
-                "font": "Standard"
-            },
-            (err, data) => {
-                if (err) {
-                    console.log("Something went wrong...");
-                    console.dir(err);
-                    return;
-                }
-                const data2 = data;
-                text(
-                    "Start..",
-                    {
-                    },
-                    (err2, freeData) => {
-                        if (err2) {
-                            console.log("Something went wrong...");
-                            console.dir(err2);
-                            return;
-                        }
-                        console.log(`================================================================================================================================\n${
-                            data2}\n\n${freeData}\n
-                            ================================================================================================================================\n
-                                CPU: ${(loadavg()[0] / cpuCores).toFixed(2)}% / 100%\n
-                                RAM: ${Math.trunc(process.memoryUsage().heapUsed / 1000 / 1000)} MB / ${Math.trunc(totalmem() / 1000 / 1000)} MB
-                                ================================================================================================================================`);
-                    }
-                );
-            }
-        );
-       
     }
 
     public _processEvent () {
