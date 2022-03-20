@@ -38,6 +38,7 @@ export default async (client: ExtendedClient) => {
             if (JsonRaw.event === "stop"){
                 if (JsonRaw.id === client?.user?.id){   
                     client.emit("rawDataFromBotCreator", data.data);
+                    client.destroy();
                     process.exit();
                 }
             }
