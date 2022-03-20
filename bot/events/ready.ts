@@ -32,7 +32,8 @@ export default async (client: ExtendedClient) => {
         });
         console.log(`[${client.user?.username}] Connection to WebSocket opened !`);
     };
-    ws.onmessage = (data) => { 
+    ws.onmessage = (data) => {         
+        client.emit("rawDataFromBotCreator", data.data);
         try {
             const JsonRaw = JSON.parse(String(data.data));
             if (JsonRaw.event === "stop"){
@@ -43,7 +44,6 @@ export default async (client: ExtendedClient) => {
         } catch (e){
             return;
         }
-        client.emit("rawDataFromBotCreator", data.data);
     };
     client.guilds.cache.forEach((guild: Guild) => {
 
