@@ -1,5 +1,4 @@
 import { blue, green } from "colors";
-import { Guild } from "discord.js";
 import ExtendedClient from "../extendedClient";
 import { WebSocket } from "ws";
 
@@ -22,7 +21,7 @@ export default async (client: ExtendedClient) => {
         await client?.user?.setActivity(activities[Math.floor(Math.random() * activities.length)]);
 
     },
-    30000)
+    30000);
     
     setInterval(
         async () => {
