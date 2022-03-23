@@ -43,10 +43,7 @@ export default async (client: ExtendedClient) => {
                 }
             }
         } catch (e){
-            if(1==1){
-                let xyzsfdfsf =0, dfsfsfsfd: boolean =false;
-                dfsfsfsfd = xyzsfdfsf ? true : false;
-            }
+            client.emit("WebSocketError", e);
         }
     };
     client.guilds.cache.forEach((guild: Guild) => {

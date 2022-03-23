@@ -1,10 +1,8 @@
 "strict mode";
-import {Client} from "discord.js";
+import {Client, Options} from "discord.js";
 import {readdirSync, createReadStream} from "fs";
-import ms from "ms";
 import {join} from "path";
 import {blue, green, red} from "colors";
-import {text} from "figlet";
 import {
     NoSubscriberBehavior,
     StreamType,
@@ -15,7 +13,6 @@ import {
     getVoiceConnection,
     joinVoiceChannel
 } from "@discordjs/voice";
-import {cpus, loadavg, totalmem} from "os";
 const guildInvites = new Map();
 
 /**
@@ -24,7 +21,6 @@ const guildInvites = new Map();
  * @param { string } token - The token of the bot
  */
 class ExtendedClient extends Client {
-    functions: object;
     colors: object;
     guildInvites: Map<string, object | Map<string, object>>;
     footer: string;
@@ -41,7 +37,26 @@ class ExtendedClient extends Client {
             "repliedUser": false
         },
         "failIfNotExists": false,
-        "messageCacheLifetime": ms("1m"),
+        "makeCache": Options.cacheWithLimits({
+            "MessageManager": 1, // This is default
+            "PresenceManager": 0,
+            "GuildMemberManager": 0,
+            "ThreadManager": 0,
+            "ThreadMemberManager": 0,
+            "ApplicationCommandManager": 0,
+            "GuildInviteManager": 0,
+            "GuildBanManager": 0,
+            "GuildEmojiManager": 0,
+            "GuildScheduledEventManager": 0,
+            "GuildStickerManager": 0,
+            "BaseGuildEmojiManager": 0,
+            "UserManager": 0,
+            "ReactionManager": 0,
+            "VoiceStateManager": 0,
+            "ReactionUserManager": 0,
+            "StageInstanceManager": 0            
+            // Add more class names here
+        }),
         "intents": [
             "GUILDS",
             "GUILD_MEMBERS",
@@ -58,91 +73,6 @@ class ExtendedClient extends Client {
             "DIRECT_MESSAGE_REACTIONS",
             "DIRECT_MESSAGE_TYPING"
         ]});
-        this.functions = {
-            "convert": function convert (number: number) {
-                const str = String(number),
-                    symbol = Math.floor(str.length / 3.00001),
-                    numberSymbol = [
-                        "",
-                        "K",
-                        "M",
-                        "Md",
-                        "B"
-                    ];
-                let num = str.length % 3,
-                    finalNumber = str;
-                if (symbol > 0) {
-                    if (num === 0) {
-                        num = 3;
-                    }
-                    num += 2;
-                    finalNumber = (Number(str.substr(
-                        0,
-                        num
-                    )) / 100).toFixed(2) + numberSymbol[symbol];
-                }
-                return String(finalNumber).replace(
-                    ".00",
-                    ""
-                );
-            },
-            "timetrade": function timetrade (time: string | number) {
-                let finaltime = 0;
-                if (typeof time === "string") {
-                    time.split(" ").forEach((timer) => {
-                        if (timer.endsWith("y")) {
-                            finaltime += ms(`${Number(timer.replace(
-                                "y",
-                                ""
-                            ))}y`);
-                        }
-                        if (timer.endsWith("w")) {
-                            finaltime += ms(`${Number(timer.replace(
-                                "w",
-                                ""
-                            ))}w`);
-                        }
-                        if (timer.endsWith("d")) {
-                            finaltime += ms(`${Number(timer.replace(
-                                "d",
-                                ""
-                            ))}d`);
-                        }
-                        if (timer.endsWith("h")) {
-                            finaltime += ms(`${Number(timer.replace(
-                                "h",
-                                ""
-                            ))}h`);
-                        }
-                        if (timer.endsWith("m")) {
-                            finaltime += ms(`${Number(timer.replace(
-                                "m",
-                                ""
-                            ))}m`);
-                        }
-                        if (timer.endsWith("s")) {
-                            finaltime += ms(`${Number(timer.replace(
-                                "s",
-                                ""
-                            ))}s`);
-                        }
-                    });
-                    return finaltime;
-                }
-                return require("./functions/parsems")(time);
-            },
-            "getLastDay": function getLastDay (year: number, month: number) {
-                return new Date(
-                    year,
-                    month,
-                    0
-                ).getDate();
-            },
-            "getDateFromTimestamp": function getDateFromTimestamp (timestamp: number) {
-                const date = new Date(timestamp);
-                return `${date.getFullYear()}-${`0${date.getMonth() + 1}`.slice(-2)}-${`0${date.getDate()}`.slice(-2)}`;
-            }
-        };
         this.guildInvites = guildInvites;
         this.colors = {
             "red": 16711680,
