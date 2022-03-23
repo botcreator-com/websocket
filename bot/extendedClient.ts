@@ -1,18 +1,8 @@
 "strict mode";
 import {Client, Options} from "discord.js";
-import {readdirSync, createReadStream} from "fs";
+import {readdirSync} from "fs";
 import {join} from "path";
 import {blue, green, red} from "colors";
-import {
-    NoSubscriberBehavior,
-    StreamType,
-    VoiceConnectionStatus,
-    createAudioPlayer,
-    createAudioResource,
-    entersState,
-    getVoiceConnection,
-    joinVoiceChannel
-} from "@discordjs/voice";
 const guildInvites = new Map();
 
 /**
@@ -24,7 +14,6 @@ class ExtendedClient extends Client {
     colors: object;
     guildInvites: Map<string, object | Map<string, object>>;
     footer: string;
-    voc: object;
     constructor (tok: string | undefined) {
         super({"partials": [
             "USER",
@@ -79,17 +68,7 @@ class ExtendedClient extends Client {
             "green": 32560,
             "default": 3092790 // Discord Color
         };
-        this.voc = {
-            joinVoiceChannel,
-            getVoiceConnection,
-            VoiceConnectionStatus,
-            entersState,
-            createAudioPlayer,
-            NoSubscriberBehavior,
-            StreamType,
-            createAudioResource,
-            createReadStream
-        };
+    
         this.footer = "MYOB";
         try {
             this.launch().then(() => {
