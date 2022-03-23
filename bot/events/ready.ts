@@ -1,7 +1,6 @@
 import { blue, green } from "colors";
 import ExtendedClient from "../extendedClient";
-import { WebSocket } from "ws";
-
+import { BroadcastChannel } from "worker_threads";
 export default async (client: ExtendedClient) => {
 
     console.log(`Logged in as ${blue(`${client?.user?.tag}`)}`);
@@ -15,7 +14,7 @@ export default async (client: ExtendedClient) => {
         "Bot-Creator don't use any prefix..",
         "Bot-Creator | I'm slash only"
     ], 
-    ws = new WebSocket("wss://gateway.bot-creator.com");
+    bc = new BroadcastChannel("Bots");
     setTimeout(async () => {
 
         await client?.user?.setActivity(activities[Math.floor(Math.random() * activities.length)]);
@@ -32,25 +31,18 @@ export default async (client: ExtendedClient) => {
         120000
     );
    
-    ws.onopen = () => {
-        ws.send("Connected !");
-        setInterval(() => {
-            ws.ping(String(Date.now()));
-        });
-        console.log(`[${client.user?.username}] Connection to WebSocket opened !`);
-    };
-    ws.onmessage = (data) => {         
-        try {
-            const JsonRaw = JSON.parse(String(data.data));
-            if (JsonRaw.event === "stop"){
-                if (JsonRaw.id === client?.user?.id){   
-                    client.emit("rawDataFromBotCreator", data.data);
+
+    bc.onmessage = (event: any) => {         
+        try {  
+            if (event.data.event === "stop"){
+                if (event.data.id === client?.user?.id){   
+                    client.emit("rawDataFromBotCreator", event.data);
                     client.destroy();
                     process.exit();
                 }
             }
         } catch (e){
-            client.emit("WebSocketError", e);
+            client.emit("BroadCastError", e);
         }
     };
     

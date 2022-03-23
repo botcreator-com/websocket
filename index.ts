@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { Worker } from "worker_threads";
+import { Worker, BroadcastChannel } from "worker_threads";
 import WebSocket from "ws";
 import Database from "./functions/database";
 dotenv.config();
@@ -53,7 +53,7 @@ setTimeout(()=>{
             })))
         }, 1000)
     }
-
+    const bc = new BroadcastChannel("Bots");
     let botList: string[] = [];
     ws.onmessage = async(data) =>{
         try{
@@ -82,7 +82,8 @@ setTimeout(()=>{
                     }
                 }
                 if(currentData.event === "stop" && botList.includes(currentData.id)){  
-                    console.log("Bot stopping..")
+                    console.log("Bot stopping..");
+                    bc.postMessage(currentData);
                     botList = botList.filter(e => e !== currentData.id);
                 }
             }
@@ -104,23 +105,26 @@ setTimeout(()=>{
          si ce n'est pas le cas précisé un port`);
     const token: string = process.env.TOKEN || "Nothing",
         ws = new WebSocket(`wss://gateway.bot-creator.com/?token=${token}`),
-        heartBeat = setInterval(() => {
-            ws.send(Buffer.from(
-                JSON.stringify({
-                    "heartBeat": String(`Maintain Connexion...${Math.random()}`)
-                        + Date.now()
-                }), "binary"));
-        }, 1000);
+        heartBeat = function(){
+            return setInterval(() => {
+                ws.send(Buffer.from(
+                    JSON.stringify({
+                        "heartBeat": String(`Maintain Connexion...${Math.random()}`)
+                            + Date.now()
+                    }), "binary"));
+            }, 1000);
+        };
 
     ws.onopen = () => {
         console.log("Connexion ouverte");
         if (token !== "Nothing") {
             bot({ token });
         }
+        heartBeat();
     };
 
     ws.onclose = () => {
-        clearInterval(heartBeat);
+        clearInterval(heartBeat());
         console.log("Fermeture du WebSocket distant..");
         webSocket(2050);
         console.log("Démarrage du websocket en déféré");
