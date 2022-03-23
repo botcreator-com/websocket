@@ -14,7 +14,7 @@ interface bot {
     }
 }
 const bot = (globalData: bot) => {
-    const worker = new Worker("./dist/bot/index.js", { "workerData": globalData });
+    const worker = new Worker("./dist/bot/index.js", { "workerData": JSON.stringify(globalData) });
     worker.on("message", (data: string) => { console.log(data); });
     worker.on("error", (error: Error) => { console.log(error); });
     worker.on("exit", (code: number) => {

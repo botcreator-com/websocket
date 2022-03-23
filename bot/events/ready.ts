@@ -9,6 +9,7 @@ export default async (client: ExtendedClient) => {
     await client?.user?.setActivity(`${client.user?.username} is Starting...`);
 
     console.log(`${green("[Bot]")} Playing: ${blue(`${client.user?.username} is Starting...`)}`);
+    
     const activities = [
         "Bot-Creator | Manager",
         "Bot-Creator | Monite you",
@@ -16,6 +17,13 @@ export default async (client: ExtendedClient) => {
         "Bot-Creator | I'm slash only"
     ], 
     ws = new WebSocket("wss://gateway.bot-creator.com");
+    setTimeout(async () => {
+
+        await client?.user?.setActivity(activities[Math.floor(Math.random() * activities.length)]);
+
+    },
+    30000)
+    
     setInterval(
         async () => {
 
@@ -46,22 +54,6 @@ export default async (client: ExtendedClient) => {
             client.emit("WebSocketError", e);
         }
     };
-    client.guilds.cache.forEach((guild: Guild) => {
-
-        if (guild?.me?.permissions.has("MANAGE_GUILD")) {
-
-            guild.invites.fetch().then((invites) => client?.guildInvites?.set(
-                guild.id,
-                invites
-            )).
-                catch((err) => {
-
-                    Error(err);
-
-                });
-
-        }
-
-    });
+    
 
 };
