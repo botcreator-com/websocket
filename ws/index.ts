@@ -2,6 +2,8 @@ import WebSocket, { WebSocketServer } from "ws";
 import { createServer } from "http";
 import { workerData } from "worker_threads";
 import { IncomingMessage } from "http";
+import url from 'url';
+
 const server = createServer(),
     wss = new WebSocketServer({ "noServer": true });
 
@@ -19,9 +21,16 @@ wss.on("connection", (ws: WebSocketAndReq, req) => {
             wss.clients.forEach(function each(client: WebSocketAndReq) {
                 if (client.readyState === WebSocket.OPEN && client !== ws) {
                     if(client.req){
-                        console.log(client.req.url);
+                        if(client.req.url){
+                             const { query } = url.parse(client.req.url,true)
+                             if(query.server == "something"){
+                                 console.log(data);
+                                client.send(data, { binary: isBinary });
+                             }
+                        }
+                     
                     }
-                    client.send(data, { binary: isBinary });
+                        
                 }
             }); 
         }
@@ -32,7 +41,6 @@ wss.on("connection", (ws: WebSocketAndReq, req) => {
 server.on("upgrade", (request, socket, head) => {
     wss.handleUpgrade(request, socket, head, function done(ws: WebSocketAndReq) {
         ws.req = request;
-        console.log(request.url);
         wss.emit("connection", ws, request);
     });
 }

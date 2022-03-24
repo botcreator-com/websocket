@@ -43,9 +43,10 @@ if (port) {
         bot({ "token": process.env.TOKEN });
     }
 setTimeout(()=>{
- let ws = new WebSocket("wss://gateway.bot-creator.com");
+ let ws = new WebSocket("wss://gateway.bot-creator.com/?server=something");
     ws.onopen = () => {
         console.log("WebSocket as started")
+        ws.send("Connected !")
         setInterval(() => {
             ws.send(Buffer.from(JSON.stringify({
                 event: "ping",
