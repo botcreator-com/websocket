@@ -13,8 +13,7 @@ interface WebSocketAndReq extends WebSocket{
 
 wss.on("connection", (ws: WebSocketAndReq, req) => {
     if(!ws.req) ws.req = req;
-    console.log("New connection", ws.req.headers["x-forwarded-for"]);
-    console.log(ws.req.headers);
+    console.log("New connection", ws.req.headers["cf-connecting-ip"]);
     ws.on("message", (data, isBinary) => { 
         if(!isBinary){
             wss.clients.forEach(function each(client) {
