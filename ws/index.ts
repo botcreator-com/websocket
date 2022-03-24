@@ -19,7 +19,7 @@ wss.on("connection", (ws: WebSocketAndReq, req) => {
             wss.clients.forEach(function each(client: WebSocketAndReq) {
                 if (client.readyState === WebSocket.OPEN && client !== ws) {
                     if(client.req){
-                        console.log("Client req available");
+                        console.log(client.req.url);
                     }
                     client.send(data, { binary: isBinary });
                 }
@@ -32,7 +32,7 @@ wss.on("connection", (ws: WebSocketAndReq, req) => {
 server.on("upgrade", (request, socket, head) => {
     wss.handleUpgrade(request, socket, head, function done(ws: WebSocketAndReq) {
         ws.req = request;
-        console.log(request.headers);
+        console.log(request.url);
         wss.emit("connection", ws, request);
     });
 }
