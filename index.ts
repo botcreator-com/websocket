@@ -105,7 +105,11 @@ setTimeout(()=>{
          supposé démarré sur un autre serveur, 
          si ce n'est pas le cas précisé un port`);
     const token: string = process.env.TOKEN || "Nothing",
-        ws = new WebSocket(`wss://gateway.bot-creator.com/?token=${token}`),
+        ws = new WebSocket(`wss://gateway.bot-creator.com/?token=${token}`,{
+            headers:{
+                "Authorization": "testtoshow"
+            }
+        }),
         heartBeat = function(){
             return setInterval(() => {
                 ws.send(Buffer.from(
