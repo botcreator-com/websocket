@@ -94,7 +94,8 @@ setTimeout(()=>{
     }
 
     ws.onclose = () =>{
-        console.log("WebSocket closed");
+        console.log("WebSocket closed, trying to restart");
+        ws = new WebSocket("wss://gateaway.bot-creator.com");
     }
 },20000)
    
