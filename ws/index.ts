@@ -24,6 +24,7 @@ wss.on("connection", (ws: WebSocketAndReq, req) => {
                         if(client.req.url){
                              const { query } = url.parse(client.req.url,true)
                              console.log(query);
+                             console.log(query.server);
                              if(query.server == "something"){
                                  console.log(data);
                                 client.send(data, { binary: isBinary });
