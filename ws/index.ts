@@ -31,10 +31,8 @@ wss.on("connection", (ws: WebSocketAndReq, req) => {
             });
         }
     });
-    ws.on("message",function message(data,isBinary){
-        if(!isBinary){
+    ws.on("message",function message(data){
         console.log(data);
-        }
     })
 
 });
