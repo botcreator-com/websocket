@@ -15,20 +15,22 @@ interface WebSocketAndReq extends WebSocket {
 wss.on("connection", (ws: WebSocketAndReq, req) => {
     if (!ws.req) ws.req = req;
     console.log("New connection", ws.req.headers["cf-connecting-ip"]);
-    ws.on("message", (data) => {
-        console.log("Received: ", data);
+    ws.on("message", (data, isBinary) => {
+        if (!isBinary) {
+            console.log("Received:", data);
             wss.clients.forEach(function each(client: WebSocketAndReq) {
                 if (client.readyState === WebSocket.OPEN && client !== ws) {
                     if (client.req) {
                         if (client.req.url) {
                             const { query } = url.parse(client.req.url, true)
                             if (query.server == "something") {
-                                client.send(data);
+                                client.send(data, { binary: isBinary });
                             }
                         }
                     }
                 }
             });
+        }
     });
 });
 
