@@ -20,13 +20,11 @@ wss.on("connection", (ws: WebSocketAndReq, req) => {
             console.log("Received:", data.toString());
             wss.clients.forEach(function each(client: WebSocketAndReq) {
                 if (client.readyState === WebSocket.OPEN && client !== ws) {
-                    if (client.req) {
-                        if (client.req.url) {
+                    if (client.req && client.req.url) {
                             const { query } = url.parse(client.req.url, true)
                             if (query.server == "something") {
                                 client.send(data, { binary: isBinary });
                             }
-                        }
                     }
                 }
             });

@@ -46,8 +46,7 @@ class ExtendedClient extends Client {
             "StageInstanceManager": 0            
             // Add more class names here
         }),
-        "intents": [
-            "GUILDS",
+        "intents": [/**   "GUILDS",
             "GUILD_MEMBERS",
             "GUILD_BANS",
             "GUILD_EMOJIS_AND_STICKERS",
@@ -60,7 +59,7 @@ class ExtendedClient extends Client {
             "GUILD_MESSAGE_TYPING",
             "DIRECT_MESSAGES",
             "DIRECT_MESSAGE_REACTIONS",
-            "DIRECT_MESSAGE_TYPING"
+            "DIRECT_MESSAGE_TYPING"*/
         ]});
         this.guildInvites = guildInvites;
         this.colors = {
