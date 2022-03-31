@@ -17,7 +17,7 @@ wss.on("connection", (ws: WebSocketAndReq, req) => {
     console.log("New connection", ws.req.headers["cf-connecting-ip"]);
     ws.on("message", (data, isBinary) => {
         if (!isBinary) {
-            console.log("Received:", data);
+            console.log("Received:", data.toString());
             wss.clients.forEach(function each(client: WebSocketAndReq) {
                 if (client.readyState === WebSocket.OPEN && client !== ws) {
                     if (client.req) {
