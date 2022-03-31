@@ -16,6 +16,7 @@ wss.on("connection", (ws: WebSocketAndReq, req) => {
     if (!ws.req) ws.req = req;
     console.log("New connection", ws.req.headers["cf-connecting-ip"]);
     ws.on("message", (data) => {
+        console.log("Received: ", data);
             wss.clients.forEach(function each(client: WebSocketAndReq) {
                 if (client.readyState === WebSocket.OPEN && client !== ws) {
                     if (client.req) {
