@@ -1,44 +1,49 @@
-import WebSocket, { WebSocketServer } from "ws";
-import { createServer } from "http";
-import { workerData } from "worker_threads";
-import { IncomingMessage } from "http";
+import { createServer, IncomingMessage } from 'http';
 import url from 'url';
+import { workerData } from 'worker_threads';
+import WebSocket, { WebSocketServer } from 'ws';
 
 const server = createServer(),
     wss = new WebSocketServer({ "noServer": true });
 
 console.log("Server started on port : ", workerData.port);
 
-interface WebSocketAndReq extends WebSocket{
-    req?:IncomingMessage
+interface WebSocketAndReq extends WebSocket {
+    req?: IncomingMessage
 }
 
 wss.on("connection", (ws: WebSocketAndReq, req) => {
-    if(!ws.req) ws.req = req;
+    if (!ws.req) ws.req = req;
     console.log("New connection", ws.req.headers["cf-connecting-ip"]);
-    ws.on("message", (data, isBinary) => { 
-        if(!isBinary){
+    ws.on("message", (data, isBinary) => {
+        if (!isBinary) {
             wss.clients.forEach(function each(client: WebSocketAndReq) {
                 if (client.readyState === WebSocket.OPEN && client !== ws) {
-                    if(client.req){
-                        if(client.req.url){
-                             const { query } = url.parse(client.req.url,true)
-                             console.log(query);
-                             console.log(query.server);
-                             if(query.server == "something"){
-                                 console.log(data);
+                    if (client.req) {
+                        if (client.req.url) {
+                            const { query } = url.parse(client.req.url, true)
+                            if (query.server == "something") {
                                 client.send(data, { binary: isBinary });
-                             }
+                            }
                         }
-                     
                     }
-                        
                 }
-            }); 
+            });
         }
     });
-}
-);
+    ws.on("message",function message(data,isBinary){
+        if(!isBinary){
+        console.log(data);
+        }
+    })
+
+});
+
+wss.on("close", (ws: WebSocketAndReq) => {
+    if(ws.req) {
+    console.log("Connection closed", ws.req.headers["cf-connecting-ip"]);
+    }
+});
 
 server.on("upgrade", (request, socket, head) => {
     wss.handleUpgrade(request, socket, head, function done(ws: WebSocketAndReq) {
