@@ -10,10 +10,15 @@ console.log("Server started on port : ", workerData.port);
 
 interface WebSocketAndReq extends WebSocket {
     req?: IncomingMessage
+    isAlive?: boolean
 }
-
+  
 wss.on("connection", (ws: WebSocketAndReq, req) => {
     if (!ws.req) ws.req = req;
+    ws.isAlive = true;
+    ws.on('pong', function () {
+        ws.isAlive = true;
+        });
     console.log("New connection", ws.req.headers["cf-connecting-ip"]);
     ws.on("message", (data, isBinary) => {
         if (!isBinary) {
@@ -32,10 +37,18 @@ wss.on("connection", (ws: WebSocketAndReq, req) => {
     });
 });
 
-wss.on("close", (ws: WebSocketAndReq) => {
-    if(ws.req) {
-    console.log("Connection closed", ws.req.headers["cf-connecting-ip"]);
-    }
+
+const interval = setInterval(function ping() {
+    wss.clients.forEach(function each(ws: WebSocketAndReq) {
+      if (ws.isAlive === false) return ws.terminate();
+      ws.isAlive = false;
+      ws.ping();
+    });
+  }, 30000);
+
+
+wss.on('close', function close() {
+    clearInterval(interval);
 });
 
 server.on("upgrade", (request, socket, head) => {
